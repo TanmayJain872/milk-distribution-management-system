@@ -73,9 +73,7 @@ const styleOfTile = {
 
 const handleSubmit = (event, customerID, amount) => {
     event.preventDefault();
-    console.log(event.target.value);
     if (customerID.length !== 5 || !amount.length) {
-        console.log('Missing Input(s)!! Please specify both the Customer ID and Amount to make the delivery request.');
         alert('Missing Input(s)!! Please specify both the Customer ID and Amount to make the delivery request.');
         return;
     }
@@ -85,14 +83,11 @@ const handleSubmit = (event, customerID, amount) => {
 
 const handleClickOfDefaultInputButtons = (event, customerID) => {
     event.preventDefault();
-    console.log(event.target.value);
-    // console.log(amount);
     handleSubmit(event, customerID, event.target.id);
 };
 
 const makeHTTPPostRequest = (url, idOfCustomer, amountToBeSent) => {
     options.body = JSON.stringify({customerID: idOfCustomer, quantity: amountToBeSent});
-    console.log(url);
     fetch(url, options)
         .then(response => response.json())
         .then(json => console.log(json))
