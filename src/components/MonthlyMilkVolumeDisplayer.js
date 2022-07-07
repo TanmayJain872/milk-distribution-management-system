@@ -73,14 +73,11 @@ const reducer = (currentState, action) => {
 
 const handleSubmit = (customerID, listOfMonths, month, year, setTotalAmountOfMilk, event) => {
     event.preventDefault();
-    console.log(customerID + ' ' + month + ' ' + year);
     if (customerID.length === 5 && month && year) {
         let urlOfApplication = new URL(`http://localhost:3001/api/milk/data/${customerID}/${listOfMonths.indexOf(month) + 1}/${year}`);
-        console.log(urlOfApplication);
         makeHTTPGetRequest(urlOfApplication, setTotalAmountOfMilk);
     }
     else {
-        console.log('Missing Input(s)!! Please specify the Customer ID, Month and Year to know the total amount of milk ordered in that particular month.');
         alert('Missing Input(s)!! Please specify the Customer ID, Month and Year to know the total amount of milk ordered in that particular month.');
         return;
     }
@@ -88,11 +85,9 @@ const handleSubmit = (customerID, listOfMonths, month, year, setTotalAmountOfMil
 };
 
 const makeHTTPGetRequest = (url, setTotal) => {
-    console.log('Ready to send request');
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log(`Total Volume of Milk ordered in a month = ${data}`);
             if (data !== null) {
                 setTotal(data + "   Litres");
             } else {
