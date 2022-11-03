@@ -1,28 +1,32 @@
-/* jshint esversion: 9 */
-
-import React, { useState, useEffect } from 'react';
+/* jshint esversion: 6 */
+import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import DateDisplayer from './components/DateDisplayer';
-import MilkDeliveryOrder from './components/MilkDeliveryOrder';
-import MonthlyMilkVolumeDisplayer from './components/MonthlyMilkVolumeDisplayer';
+import { theme, ThemeProvider } from './components/CustomAppTheme';
+import LoginForm from './components/LoginForm';
+import RegistrationForm from './components/RegistrationForm';
+import Home from './components/Home';
 
-const listOfMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+export const CustomerIDsContext = React.createContext('');
 
 function App() {
-
-  const [customerID, setCustomerID] = useState('');
-
-  useEffect(() => {
-    console.log("App Customer ID = " + customerID);
-  }, [customerID]);
-  
-
+  let [customerID, setCustomerID] = useState('');
   return (
-    <div>
-      <DateDisplayer months={listOfMonths}/>
-      <MilkDeliveryOrder changeCustomerID={id => setCustomerID(id)} />
-      <MonthlyMilkVolumeDisplayer customerID={customerID} listOfMonths={listOfMonths}/>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Routes>
+        <Route path='/' element={
+          <CustomerIDsContext.Provider value={[customerID, setCustomerID]}>
+            <LoginForm />
+          </CustomerIDsContext.Provider>
+        } />
+        <Route path='/home' element={
+          <CustomerIDsContext.Provider value={[customerID, setCustomerID]}>
+            <Home />
+          </CustomerIDsContext.Provider>
+        } />
+        <Route path='/signup' element={<RegistrationForm />} />
+      </Routes>
+    </ThemeProvider>
   );
 }
 

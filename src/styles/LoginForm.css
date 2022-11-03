@@ -1,0 +1,20 @@
+#login-form {
+    display:flex;
+    margin: auto;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #222222;
+    box-shadow: 1;
+    border-radius: 16px;
+    width: 400px;
+    height: 300px;
+    padding: 1rem;
+};
+
+#text-field {
+    border-color: white;
+    border-radius: 8px;
+    background-color: white;
+    margin-bottom: 2px;
+    text-align: center;
+}

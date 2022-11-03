@@ -36,3 +36,54 @@
     transform: rotate(360deg);
   }
 }
+
+#registration-form {
+  display: flex;
+  margin: auto;
+  box-shadow: 1;
+  border-radius: 16px;
+  justify-content: center;
+  align-items: center;
+  background-color: #222222;
+  width: 450px;
+  height: 500px;
+  padding: 8px;
+}
+
+#order-placement-form {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1;
+  border-radius: 16px;
+  justify-content: center;
+  align-items: center;
+  background-color: #222222;
+  width: 400px;
+  height: 400px;
+  padding: 8px;
+};
+
+#monthly-amount-displayer {
+  display: flex;
+  box-shadow: 1;
+  border-radius: 16px;
+  background-color: #222222;
+  width: 400px;
+  height: 400px;
+  padding: 8px;
+}
+
+.text-field {
+  width: 230px;
+  border-color: white;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.tiles {
+  max-width: 66.7px;
+  max-height: 35px;
+  background-color: whitesmoke;
+  border: 1.3px solid gray;
+  color: black;
+};
