@@ -3,7 +3,7 @@
 /* This component let's user access the total volume of milk ordered by them in a particular month */
 
 import React, { useContext, useEffect, useState } from 'react';
-import { Button, MenuItem, Stack, TextField } from '@mui/material';
+import { Button, InputAdornment, MenuItem, Stack, TextField } from '@mui/material';
 import { DesktopDatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
@@ -113,6 +113,21 @@ function MonthlyOrderedQuantityDisplayer(props) {
             >
                 Submit
             </Button>
+            <br />
+            <hr style={{ width: '250px', height: '0px', color: 'gray', backgroundColor: 'gray' }} />
+            <br />
+            <TextField 
+                fullWidth
+                variant="outlined"
+                label='Total Quantity'
+                size='large'
+                value={totalQuantityOrdered}
+                sx={styleOfTextFields}
+                InputProps={{
+                    readOnly: true,
+                    endAdornment: <InputAdornment>Litres</InputAdornment>
+                }}
+            />
         </Stack>
     )
 }
