@@ -1,8 +1,7 @@
 /* jshint esversion: 11 */
 
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CustomerIDsContext } from "../App";
 import '../styles/LoginForm.css';
 
 import { Button, Stack, TextField } from '@mui/material';
@@ -40,6 +39,7 @@ const handleSubmit = (event, customerID, password, navigateTo) => {
     fetch(url, options)
         .then(response => {
             if (response.status === 201) {
+                sessionStorage.setItem('userID', customerID);
                 navigateTo("../home", { replace: true });
                 return;
             }
@@ -54,7 +54,7 @@ const handleSubmit = (event, customerID, password, navigateTo) => {
 
 function LoginForm() {
 
-    const [customerID, setCustomerID] = useContext(CustomerIDsContext);
+    const [customerID, setCustomerID] = useState("");
     const [password, setPassword] = useState("");
     const userIDRef = useRef(null);
     const navigateToPath = useNavigate();
