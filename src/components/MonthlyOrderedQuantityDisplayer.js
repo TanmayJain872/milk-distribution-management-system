@@ -2,13 +2,12 @@
 
 /* This component let's user access the total volume of milk ordered by them in a particular month */
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, InputAdornment, MenuItem, Stack, TextField } from '@mui/material';
 import { DesktopDatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import '../styles/MonthlyAmountDisplayer.css';
-import { CustomerIDsContext } from "../App";
 
 
 const styleOfTextFields = {
@@ -55,7 +54,7 @@ const makeHTTPGetRequest = (url, setTotal) => {
 function MonthlyOrderedQuantityDisplayer(props) {
     const [totalQuantityOrdered , setTotalQuantityOrdered] = useState('');
     const [month, setMonth] = useState(dayjs(new Date()).format("MMMM YYYY"));
-    const customerID = useContext(CustomerIDsContext)[0];
+    const customerID = sessionStorage.getItem('userID');
 
     const dairyProducts = [
         "Milk",
