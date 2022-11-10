@@ -47,7 +47,7 @@ function UserAccountDetails() {
                     Change Password
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={ event => navigate('/', { replace: true }) }>
+                <MenuItem onClick={ event => { sessionStorage.clear(); navigate('/', { replace: true }); }}>
                     <ListItemIcon>
                         <LogoutIcon />
                     </ListItemIcon>
