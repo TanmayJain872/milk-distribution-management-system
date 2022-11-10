@@ -1,9 +1,8 @@
 /* jshint esversion: 9 */
 
 import { Box, Button, ButtonGroup, InputAdornment, MenuItem, TextField } from '@mui/material';
-import React, { useContext, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import '../App.css';
-import { CustomerIDsContext } from "../App";
 
 
 // STYLE OF FORM ELEMENTS
@@ -48,7 +47,7 @@ const makeHTTPPostRequest = (idOfCustomer, amountToBeSent) => {
 
 function DeliveryOrderPlacer(props) {
     
-    const customerID = useContext(CustomerIDsContext)[0];
+    const customerID = sessionStorage.getItem('userID');
     let [dairyProduct, selectDairyProduct] = useState("");
     let [quantity, setQuantity] = useState(0);
     const quantityRef = useRef(null);
