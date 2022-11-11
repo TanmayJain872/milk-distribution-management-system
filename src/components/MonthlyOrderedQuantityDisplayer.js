@@ -21,35 +21,22 @@ const handleSubmit = (customerID, selectedMonth, setTotalQuantity, event) => {
     event.preventDefault();
     const listOfMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const [month, year] = selectedMonth.split(' ');
-    console.log(customerID + ' ' + month + ' ' + year);
-    if (customerID.length === 5 && month && year) {
+    if (month && year) {
         let urlOfApplication = new URL(`http://localhost:3001/api/milk/orders/${customerID}/${listOfMonths.indexOf(month) + 1}/${year}`);
-        console.log(urlOfApplication);
-        makeHTTPGetRequest(urlOfApplication, setTotalQuantity);
+        fetch(urlOfApplication)
+            .then(response => response.json())
+            .then(data => {
+                setTotalQuantity(data);
+                displayFieldRef.current.focus();
+            })
+            .catch(error => console.log(error));
     }
     else {
-        console.log('Missing Input(s)!! Please specify the Customer ID, Month and Year to know the total amount of milk ordered in that particular month.');
         alert('Missing Input(s)!! Please specify the Customer ID, Month and Year to know the total amount of milk ordered in that particular month.');
-        // return;
     }
     
 };
 
-const makeHTTPGetRequest = (url, setTotal) => {
-    console.log('Ready to send request');
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            console.log(`Total Volume of Milk ordered in a month = ${data}`);
-            if (data !== null) {
-                setTotal(data + " Litres");
-            } else {
-                alert(`No Data Found for the given search criteria. Please make sure that the values of input are correct.`);
-                // return;
-            }
-        })
-        .catch(error => console.log(error));
-};
 
 function MonthlyOrderedQuantityDisplayer(props) {
     const [totalQuantityOrdered , setTotalQuantityOrdered] = useState('');
