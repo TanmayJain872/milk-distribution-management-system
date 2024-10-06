@@ -61,6 +61,7 @@
   width: 400px;
   height: 400px;
   padding: 8px;
+  margin: auto;
 };
 
 #monthly-amount-displayer {

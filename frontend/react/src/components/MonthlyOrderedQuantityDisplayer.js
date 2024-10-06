@@ -7,14 +7,7 @@ import { Button, InputAdornment, MenuItem, Stack, TextField } from "@mui/materia
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import "../styles/MonthlyAmountDisplayer.css";
-
-
-const styleOfTextFields = {
-    width: "230px",
-    borderRadius: "4px",
-    backgroundColor: "white",
-};
+import { monthlyAmountDisplayer, styleOfTextFields } from "../styles/MonthlyAmountDisplayerStyles.js";
 
 
 const handleSubmit = (customerID, selectedMonth, setTotalQuantity, event) => {
@@ -57,64 +50,68 @@ function MonthlyOrderedQuantityDisplayer(props) {
     }, [month]);
 
     return (
-        <Stack 
-            component="form"
-            id="monthly-amount-displayer"
-            spacing={1.5}
-            onSubmit={event => handleSubmit(customerID, month, setTotalQuantityOrdered, event)}
-        >
-            <TextField
-                select
-                fullWidth
-                variant="outlined"
-                label="Dairy Products"
-                size="large"
-                defaultValue=""
-                sx={styleOfTextFields}
+        <div>
+            <h1>Ordered Quantity</h1>
+            <Stack 
+                component="form"
+                sx={monthlyAmountDisplayer}
+                spacing={1.5}
+                onSubmit={event => handleSubmit(customerID, month, setTotalQuantityOrdered, event)}
             >
-                {
-                    dairyProducts.map(product => (
-                        <MenuItem key={product} value={product}>
-                            {product}
-                        </MenuItem>
-                    ))
-                }
-            </TextField>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DesktopDatePicker
-                    disableFuture
-                    label="Select Month"
+                <TextField
+                    select
+                    fullWidth
+                    variant="outlined"
+                    label="Dairy Products"
+                    size="large"
+                    defaultValue=""
+                    sx={styleOfTextFields}
+                >
+                    {
+                        dairyProducts.map(product => (
+                            <MenuItem key={product} value={product}>
+                                {product}
+                            </MenuItem>
+                        ))
+                    }
+                </TextField>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DesktopDatePicker
+                        disableFuture
+                        label="Select Month"
+                        variant="contained"
+                        views={["year", "month"]}
+                        margin="normal"
+                        value={month}
+                        onChange={month => setMonth(dayjs(month).format("MMMM YYYY"))}
+                        renderInput={(params) => <TextField {...params} sx={styleOfTextFields} />}
+                    />
+                </LocalizationProvider>
+                <Button 
                     variant="contained"
-                    views={["year", "month"]}
-                    margin="normal"
-                    value={month}
-                    onChange={month => setMonth(dayjs(month).format("MMMM YYYY"))}
-                    renderInput={(params) => <TextField {...params} sx={styleOfTextFields} />}
+                    size="large"
+                    type="submit"
+                    sx={{ border: "1px solid" }}
+                >
+                    Submit
+                </Button>
+                <br />
+                <hr style={{ width: "250px", height: "0px", color: "gray", backgroundColor: "gray" }} />
+                <br />
+                <TextField 
+                    fullWidth
+                    variant="outlined"
+                    label="Total Quantity"
+                    size="large"
+                    value={totalQuantityOrdered}
+                    sx={styleOfTextFields}
+                    InputProps={{
+                        readOnly: true,
+                        endAdornment: <InputAdornment>Litres</InputAdornment>
+                    }}
                 />
-            </LocalizationProvider>
-            <Button 
-                variant="contained"
-                size="large"
-                type="submit"
-            >
-                Submit
-            </Button>
-            <br />
-            <hr style={{ width: "250px", height: "0px", color: "gray", backgroundColor: "gray" }} />
-            <br />
-            <TextField 
-                fullWidth
-                variant="outlined"
-                label="Total Quantity"
-                size="large"
-                value={totalQuantityOrdered}
-                sx={styleOfTextFields}
-                InputProps={{
-                    readOnly: true,
-                    endAdornment: <InputAdornment>Litres</InputAdornment>
-                }}
-            />
-        </Stack>
+            </Stack>
+        </div>
     )
 }
 

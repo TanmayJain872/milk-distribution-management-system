@@ -21,7 +21,7 @@ function UserAccountDetails() {
                     alt='React Logo' 
                     src='logo192.png' 
                     onClick={handleClick} 
-                    sx={{ fontSize: '20px', marginLeft: 'auto', bgcolor: 'black' }}
+                    sx={{ fontSize: '20px', bgcolor: 'black' }}
                 />
             </Tooltip>
             <Menu
