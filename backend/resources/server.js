@@ -159,7 +159,7 @@ app.post("/api/milk/login", checkLoginCredentials, (request, response) => {
 });
 
 // End-Point For getting Total volume of Milk ordered in a month
-app.get("/api/milk/orders/:customerID/:month/:year", (request, response) => {
+app.get("/api/milk/orders/:customerID/:month/:year", verifyToken, (request, response) => {
     const { customerID, month, year } = request.params;
     let queryString = "SELECT sum(QuantityOfMilk) as totalVolumeInAMonth FROM milk_requests WHERE CustomerID = '" + customerID + "' and month(RequestTimeStamp) = '" + month + "' and year(RequestTimeStamp) = " + year + ";";
     
